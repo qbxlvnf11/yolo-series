@@ -21,7 +21,7 @@ docker pull
 
 #### - Docker run
 ```
-nvidia-docker pull 
+nvidia-docker run 
 ```
 
 How to use
@@ -37,9 +37,20 @@ How to use
 yolov3_convert_onnx_tensorrt.py
 ```
 
-Yolov3 Run Environments with TensorRT 7.2.2 & Pytorch
+Parameters of Yolov3 Inference or Train
 =============
-#### - Parameters
+#### - Refer to config folder
+- yolov3_config.ini: yolov3 model parameters
+- train_config.ini: yolov3 train parameters
+- tensorrt_config.ini: yolov3 tensorrt parameters
+
+Dataset
+=============
+
+#### - Download COCO dataset
+```
+./get_coco_dataset.sh
+```
 
 References
 =============
