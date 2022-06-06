@@ -10,8 +10,18 @@ Description
 Contents
 =============
 
-- Yolov3 Train/Inference
-- Converting Yolov3 Pytorch Weigths to TensorRT Engines
+#### - Yolov3 Train/inference
+- Train yolov3 model
+- Detect image
+
+#### - Yolov3 TensorRT Engine
+- Convert yolov3 Pytorch weigths to TensorRT engine
+- Real-time inference with yolov3 TensorRT engine
+
+#### - Config files
+- yolov3_config.ini: yolov3 model parameters
+- train_config.ini: yolov3 train parameters
+- tensorrt_config.ini: yolov3 tensorrt parameters
 
 Yolov3 Run Environments with TensorRT 7.2.2 & Pytorch
 =============
@@ -40,22 +50,15 @@ How to use
 python yolov3_convert_onnx_tensorrt.py --yolov3_config_file_path './config/yolov3_config.ini' --tensorrt_config_file_path './config/tensorrt_config.ini'
 ```
 
-#### - Inferencing image with Yolov3
+#### - Detect image with Yolov3
 ```
 ./create_model_def.sh {class_num} {cfg_name}
 ```
 
-#### - Train image with Yolov3
+#### - Train Yolov3 Model
 ```
 ./create_model_def.sh {class_num} {cfg_name}
 ```
-
-Config files of Yolov3 Train/Inference or 
-=============
-#### - Refer to config folder
-- yolov3_config.ini: yolov3 model parameters
-- train_config.ini: yolov3 train parameters
-- tensorrt_config.ini: yolov3 tensorrt parameters
 
 Build Dataset
 =============
