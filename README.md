@@ -12,7 +12,6 @@ Contents
 
 - Yolov3 Train/Inference
 - Converting Yolov3 Pytorch Weigths to TensorRT Engines
-- Refer to config files or parameters
 
 Yolov3 Run Environments with TensorRT 7.2.2 & Pytorch
 =============
