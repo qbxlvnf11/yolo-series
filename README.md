@@ -3,13 +3,16 @@ Description
 =============
 
 #### - Yolov3
+- You only look once (YOLO) is one of the the powerful and real-time 1-stage object detection systems.
+- Improved features compared to yolov2: FPN,shortcut connection, logistic regression etc.
+- More details: [YOLOv3: An Incremental Improvement](https://arxiv.org/pdf/1804.02767.pdf)
 
 Contents
 =============
 
-#### - Yolov3 Train
-#### - Yolov3 Inference
-#### - Converting Yolov3 Pytorch Weigths to TensorRT Engines 
+#### - Yolov3 Train/Inference
+#### - Converting Yolov3 Pytorch Weigths to TensorRT Engines
+#### - Refer to config files or parameters
 
 Yolov3 Run Environments with TensorRT 7.2.2 & Pytorch
 =============
@@ -38,6 +41,16 @@ How to use
 python yolov3_convert_onnx_tensorrt.py --yolov3_config_file_path './config/yolov3_config.ini' --tensorrt_config_file_path './config/tensorrt_config.ini'
 ```
 
+#### - Inferencing image with Yolov3
+```
+./create_model_def.sh {class_num} {cfg_name}
+```
+
+#### - Train image with Yolov3
+```
+./create_model_def.sh {class_num} {cfg_name}
+```
+
 Config files of Yolov3 Train/Inference or 
 =============
 #### - Refer to config folder
@@ -45,7 +58,7 @@ Config files of Yolov3 Train/Inference or
 - train_config.ini: yolov3 train parameters
 - tensorrt_config.ini: yolov3 tensorrt parameters
 
-Dataset
+Build Dataset
 =============
 
 #### - Download COCO dataset
@@ -71,6 +84,16 @@ python yolov3_convert_onnx_tensorrt.py --target 'coco2014' --data_folder_path '.
 
 References
 =============
+
+#### - Yolov3 Paper
+'''
+@article{yolov3,
+  title={YOLOv3: An Incremental Improvement},
+  author={Redmon, Joseph and Farhadi, Ali},
+  journal = {arXiv},
+  year={2018}
+}
+'''
 
 #### - Yolov3 Pytorch
 
