@@ -44,20 +44,27 @@ How to use
 ./create_model_def.sh {class_num} {cfg_name}
 ```
 
-#### - Build TensorRT engine
-- Params: refer to parse_args()
+#### - Download 
 ```
-python yolov3_convert_onnx_tensorrt.py --yolov3_config_file_path './config/yolov3_config.ini' --tensorrt_config_file_path './config/tensorrt_config.ini'
+./download_weights.sh
 ```
 
 #### - Detect image with Yolov3
+- Params: refer to config files and parse_args()
 ```
-./create_model_def.sh {class_num} {cfg_name}
+python main.py --mode yolov3-detection-img
 ```
 
 #### - Train Yolov3 Model
+- Params: refer to config files and parse_args()
 ```
-./create_model_def.sh {class_num} {cfg_name}
+python train.py --mode yolov3-train
+```
+
+#### - Build TensorRT engine
+- Params: refer to config files and parse_args()
+```
+python yolov3_convert_onnx_tensorrt.py --yolov3_config_file_path ./config/yolov3_config.ini --tensorrt_config_file_path ./config/tensorrt_config.ini
 ```
 
 Build Dataset
@@ -73,7 +80,7 @@ Build Dataset
 - In train process, read builded data json file and get train data
 - Params: refer to parse_args()
 ```
-python yolov3_convert_onnx_tensorrt.py --target 'coco2014' --data_folder_path './data/train_data/coco' --save_folder_path './data/data_json/coco'
+python yolov3_convert_onnx_tensorrt.py --target coco2014 --data_folder_path ./data/train_data/coco --save_folder_path ./data/data_json/coco
 ```
 
 #### - Format of data json files
