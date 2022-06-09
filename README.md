@@ -26,14 +26,17 @@ Contents
 Yolov3 Run Environments with TensorRT 7.2.2 & Pytorch
 =============
 
+#### - Docker with TensorRT
+- https://docs.nvidia.com/deeplearning/tensorrt/container-release-notes/rel_20-12.html#rel_20-12
+
 #### - Docker pull
 ```
-docker pull 
+docker pull qbxlvnf11docker/tensorrt_20.12_yolov3:latest
 ```
 
 #### - Docker run
 ```
-nvidia-docker run 
+nvidia-docker run -it --name yolov3_tensorrt -v {yolo-v3-tensorrt-repository-path}:/workspace/Yolov3 -w /workspace/Yolov3 qbxlvnf11docker/tensorrt_20.12_yolov3:latest bash
 ```
 
 How to use
