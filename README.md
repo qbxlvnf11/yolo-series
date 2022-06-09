@@ -47,7 +47,7 @@ How to use
 ./create_model_def.sh {class_num} {cfg_name}
 ```
 
-#### - Download 
+#### - Download Pretrained Yolov3 Weights
 ```
 ./download_weights.sh
 ```
@@ -73,7 +73,7 @@ python yolov3_convert_onnx_tensorrt.py --yolov3_config_file_path ./config/yolov3
 Build Dataset
 =============
 
-#### - Download COCO dataset
+#### - Download COCO2014 dataset
 ```
 ./get_coco_dataset.sh
 ```
