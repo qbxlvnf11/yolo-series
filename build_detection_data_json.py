@@ -29,8 +29,7 @@ def build_detection_data_json_file(parsing_data_dic, save_folder_path, save_file
 			print('Save complete')
 
 def parse_args():
-	parser = argparse.ArgumentParser(
-		description='Combine object detection label format and build data')
+	parser = argparse.ArgumentParser()
 	parser.add_argument('--target', help='target data', choices=['coco2014'], default='coco2014')
 	parser.add_argument('--load_data_mode', help='loading image folder or data path list', choices=['image_folder', 'data_path_txt'], default='data_path_txt')
 	parser.add_argument('--data_folder_path', help='target data folder path', default='./data/train_data/coco')
