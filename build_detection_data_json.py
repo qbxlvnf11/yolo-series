@@ -23,6 +23,10 @@ def build_detection_data_json_file(parsing_data_dic, save_folder_path, save_file
 		
 		json_save_file_name = save_file_name + '_' + key + '.json'
 		print('Save file name:', json_save_file_name)
+
+		if not os.path.exists(save_folder_path):
+			print('Make folder {}'.format(save_folder_path))
+			os.makedirs(save_folder_path)
 		
 		with open(os.path.join(save_folder_path, json_save_file_name), 'w') as f:
 			json.dump(parsing_data_dic[key], f)
