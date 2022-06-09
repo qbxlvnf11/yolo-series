@@ -9,10 +9,10 @@ from xml.etree import ElementTree
 def detection_coco2014_dataset_parsing(mode, data_folder_path, load_data_mode, data_path_txt_name):
     print('-'*50)
     print('Mode:', mode)
-    print(f'COCO data folder path: {data_folder_path}')
+    print(f'COCO 2014 data folder path: {data_folder_path}')
     
     # Parsing data dict
-    coco214_data_dict = {}
+    coco2014_data_dict = {}
     
     label_dir_path = os.path.join(data_folder_path, 'labels', mode)
     img_dir_path = os.path.join(data_folder_path, 'images', mode)
@@ -127,15 +127,15 @@ def detection_coco2014_dataset_parsing(mode, data_folder_path, load_data_mode, d
             image_list.append(image)	
             object_boxes_list.append(object_box)
             
-    coco214_data_dict['class_format'] = 'id'
-    coco214_data_dict['label_scale'] = 'relative'           
-    coco214_data_dict['image_list'] = image_list
-    coco214_data_dict['image_num'] = len(image_list)
-    coco214_data_dict['object_boxes_list'] = object_boxes_list
-    coco214_data_dict['object_boxes_num'] = object_box_id
+    coco2014_data_dict['class_format'] = 'id'
+    coco2014_data_dict['label_scale'] = 'relative'           
+    coco2014_data_dict['image_list'] = image_list
+    coco2014_data_dict['image_num'] = len(image_list)
+    coco2014_data_dict['object_boxes_list'] = object_boxes_list
+    coco2014_data_dict['object_boxes_num'] = object_box_id
 
-    print('Num of images:', coco214_data_dict['image_num'])
-    print('Num of boxes:', coco214_data_dict['object_boxes_num'])
+    print('Num of images:', coco2014_data_dict['image_num'])
+    print('Num of boxes:', coco2014_data_dict['object_boxes_num'])
 
     return coco214_data_dict
 
