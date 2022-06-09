@@ -63,12 +63,5 @@ class TrainSettings():
 			raise ValueError()
 		print('Optimizer:', self.optimizer)
 		
-		''''
-		scheduler = optim.lr_scheduler.LambdaLR(optimizer=self.optimizer,
-                                        lr_lambda=lambda epoch: 0.95 ** epoch,
-                                        last_epoch=-1,
-                                        verbose=False)
-                '''
-		
 		self.lr_scheduler = optim.lr_scheduler.MultiStepLR(self.optimizer, milestones=self.lr_decay_step, gamma=self.lr_decay)
 		
