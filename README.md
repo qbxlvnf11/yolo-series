@@ -10,12 +10,12 @@ Description
 Contents
 =============
 
+<img src="https://user-images.githubusercontent.com/52263269/176016274-0179f9a9-2207-4b46-941d-ddbbde28b811.png" width="30%"></img>
+<img src="https://user-images.githubusercontent.com/52263269/176016278-a3bbbe6c-f7d8-411b-9879-48ddf721a7ac.png" width="30%"></img>
+
 #### - Yolov3 Train/inference
 - Train yolov3 model
 - Detect image
-
-![COCO_val2014_000000000761_inferencing_yolov3](https://user-images.githubusercontent.com/52263269/176016274-0179f9a9-2207-4b46-941d-ddbbde28b811.png)
-![COCO_val2014_000000000074_inferencing_yolov3](https://user-images.githubusercontent.com/52263269/176016278-a3bbbe6c-f7d8-411b-9879-48ddf721a7ac.png)
 
 #### - Yolov3 TensorRT Engine
 - Convert yolov3 Pytorch weigths to TensorRT engine
