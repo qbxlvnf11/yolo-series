@@ -2,6 +2,8 @@
 Description
 =============
 
+#### - Yolo object detector series of various version (refer to each branch)
+
 #### - Yolov3
 - You only look once (YOLO) is one of the the powerful and real-time 1-stage object detection systems.
 - Improved features compared to yolov2: FPN,shortcut connection, logistic regression etc.
