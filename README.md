@@ -18,6 +18,7 @@ Contents
 
 #### - Yolov3 Train/inference
 - Train yolov3 model
+- Fine-tune yolov3 model
 - Detect image
 
 #### - Yolov3 TensorRT Engine
