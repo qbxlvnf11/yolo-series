@@ -47,7 +47,7 @@ class Trainer:
 
         # training related attr
         self.max_epoch = self.train_config.getint('train', 'epochs')
-        self.start_epoch = self.train_config.getboolean('train', 'start_epoch')
+        self.start_epoch = self.train_config.getint('train', 'start_epoch')
         self.fp16 = self.train_config.getboolean('data', 'fp16')
         self.scaler = torch.cuda.amp.GradScaler(enabled=self.fp16)
         self.is_distributed = get_world_size() > 1
