@@ -46,7 +46,7 @@ class Trainer:
         self.train_config = config_dict['train_config']
 
         # training related attr
-        self.max_epoch = exp.max_epoch
+        self.max_epoch = self.train_config.getint('train', 'epochs')
         self.start_epoch = self.train_config.getboolean('train', 'start_epoch')
         self.fp16 = self.train_config.getboolean('data', 'fp16')
         self.scaler = torch.cuda.amp.GradScaler(enabled=self.fp16)
