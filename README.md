@@ -1,7 +1,7 @@
 Description
 =============
 
-#### - Yolo object detector series of various version (refer to each branch)
+#### - Yolo object detector series of various version (refer to each branch or tag)
 
 #### - YoloX
   - You only look once (YOLO) is one of the the powerful and real-time 1-stage object detection systems
