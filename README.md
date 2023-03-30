@@ -14,19 +14,19 @@ Description
   - Characteristic
     - E-ELAN Architecture
 
-    <img src="https://user-images.githubusercontent.com/52263269/228470825-01baf4f0-c06f-480b-8e64-003f99ab17f4.png" width="80%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228470825-01baf4f0-c06f-480b-8e64-003f99ab17f4.png" width="90%"></img>
 
     - Model Scaling for Concatenation-Based Model Architecture
 
-    <img src="https://user-images.githubusercontent.com/52263269/228469230-30ff0446-7d33-4cb8-8511-7a466a16b890.png" width="80%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228469230-30ff0446-7d33-4cb8-8511-7a466a16b890.png" width="90%"></img>
 
     - Planned re-parameterized convolution
 
-    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="80%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="60%"></img>
 
     - Coarse for auxiliary and fine for lead loss
 
-    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="80%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="100%"></img>
 
 
 Contents
@@ -44,13 +44,11 @@ Contents
 
   - Validate & Inference Yolov7 model
 
-    <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="40%"></img> 
+    <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="45%"></img> 
+    <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="45%"></img>
     
-    <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="40%"></img>
-    
-    <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="40%"></img> 
-    
-    <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="40%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="45%"></img> 
+    <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="45%"></img>
 
 #### - Convert & Inference Yolov7 TensorRT Engine
 - Convert Yolov7 Pytorch weigths to TensorRT engine: FP16, INT8 calibration
@@ -152,7 +150,7 @@ How to use
   git clone https://github.com/Linaom1214/tensorrt-python.git
   ```
   
-- COCO pretrained ONNX
+  - COCO pretrained ONNX
 
   ```
   python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
