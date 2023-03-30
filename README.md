@@ -81,6 +81,13 @@ ${DATA_ROOT}
             |   |-- Safety_Helmet_Detection_with_Extended_Labels
             |   |   |   |-- Images
             |   |   |   |-- Annotations
+            |   |-- COCO2017
+            annotations
+            |   |   |   |-- images
+            |   |   |   |-- labels
+            |   |   |   |-- train2017.txt
+            |   |   |   |-- val2017.txt
+            |   |   |   |-- test-dev2017.txt
 ```
 
 
