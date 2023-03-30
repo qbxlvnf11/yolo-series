@@ -1,12 +1,6 @@
 Description
 =============
 
-<img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="45%"></img> 
-<img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="45%"></img>
-
-<img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="45%"></img> 
-<img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="45%"></img>
-
 #### - Yolo object detector series of various version (refer to each branch or tag)
 
 #### - Contributions of Yolov7
@@ -42,13 +36,21 @@ Contents
 
 #### - Yolov7 Train/Fine-tune/Validate/Inference
   - Train & Fine-tune Yolov7 model
-    - Jointly learning of CrowdHuman, Safety Helmet Dataset (refet to cache_labels method in '/utils/dataset.py')
+    - Fine-tune with custom human detection dataset: jointly learning of CrowdHuman, Safety Helmet Dataset (refet to cache_labels method in '/utils/dataset.py')
     - Caution! OTA (Optimal Transport Assignment for Object Detection) loss likeyly to cause GPU memory overflow when maximum length of label is very long (e.g. 782 in CrowdHuman)
     - This problem can be addressed by modifying the parameters of the configuration file to limit the maximum length of label or not use OTA loss.
       - Limiting the maximum length of label: e.g. set 'cut_max_len' parameter as 200 in human_custom.yaml
       - Not use OTA loss: e.g. set 'loss_ota' parameter as 1 in hyp.scratch.human_custom.yaml
 
-  - Validate & Inference Yolov7 model
+  - Test & Inference Yolov7 model
+    - Test: Confusion Matrix, F1/PR/P/R Curve etc.
+    - Inference: Detect objects in image
+    
+  <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="45%"></img> 
+  <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="45%"></img>
+
+  <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="45%"></img> 
+  <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="45%"></img>
 
 #### - Convert & Inference Yolov7 TensorRT Engine
 - Convert Yolov7 Pytorch weigths to TensorRT engine: FP16, INT8 calibration
