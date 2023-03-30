@@ -82,7 +82,6 @@ ${DATA_ROOT}
             |   |   |   |-- Images
             |   |   |   |-- Annotations
             |   |-- COCO2017
-            annotations
             |   |   |   |-- images
             |   |   |   |-- labels
             |   |   |   |-- train2017.txt
