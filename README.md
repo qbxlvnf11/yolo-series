@@ -3,39 +3,58 @@ Description
 
 #### - Yolo object detector series of various version (refer to each branch or tag)
 
-#### - YoloX
-  - You only look once (YOLO) is one of the the powerful and real-time 1-stage object detection systems
-  - Structure: 'Input - Backbone - Neck - Dense Prediction (Head)'
-    - Darknet53 backbone with SPP layer: extracting feature map
-    - FPN nect
-      - Multi-scale feature map
-      - Detecting large objects from the feature map with small resolution and detecting small objects from the feature map with high resolution
-    - Decoupled head
-    
-    <img src="https://user-images.githubusercontent.com/52263269/197380708-87811312-742e-45ae-922a-8ff7370deceb.png" width="50%"></img>
+#### - Contributions of Yolov7
+  - Several trainable bag-of-freebies methods are designed to improve the performance of real-time object detection without increasing inference cost.
+  - For the development of detection methods, the following two issues were discovered and solutions were proposed. (1) How can the original module be replaced with a re-parameterized module? (2) How dynamic label assignment strategy deals with assignment to different output layers.
+  - "extend" and "compound scaling" methods are proposed so that real-time object detectors can efficiently utilize parameters and computations.
+  - The proposed Yolov7 maintained high performance despite reducing parameters by about 40% and computation by about 50%.
+
+#### - Summary of Yolov7 Mechanism
+  - Blog post link: https://blog.naver.com/qbxlvnf11/223056418459
+  - Characteristic
+    - E-ELAN Architecture
+
+    <img src="https://user-images.githubusercontent.com/52263269/228470825-01baf4f0-c06f-480b-8e64-003f99ab17f4.png" width="50%"></img>
+
+    - Model Scaling for Concatenation-Based Model Architecture
+
+    <img src="https://user-images.githubusercontent.com/52263269/228469230-30ff0446-7d33-4cb8-8511-7a466a16b890.png" width="50%"></img>
+
+    - Planned re-parameterized convolution
+
+    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="50%"></img>
+
+    - Coarse for auxiliary and fine for lead loss
+
+    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="50%"></img>
+
 
 Contents
 =============
 
-#### - YoloX Train/inference
-  - Train YoloX model
-  - Fine-tune YoloX model
-  - Detect objects in image
-  
-  <img src="https://user-images.githubusercontent.com/52263269/197380793-d6d9aa43-0c60-4582-8205-27e08e885ca7.jpg" width="30%"></img>
-  <img src="https://user-images.githubusercontent.com/52263269/197380863-12d6792b-9e05-4009-ab47-00247c55ed51.png" width="30%"></img>
+#### - Modify Yolov7 code in [Yolov7 official repository](https://github.com/WongKinYiu/yolov7) to make object detector optimize for human detection (jointly learning of CrowdHuman, Safety Helmet Dataset)
 
-  <img src="https://user-images.githubusercontent.com/52263269/197380885-7d03b854-b98f-407f-8923-8d02a97c3091.jpg" width="30%"></img>
-  <img src="https://user-images.githubusercontent.com/52263269/197380898-421853b0-1627-447b-94a2-666897373bb4.png" width="30%"></img>
+#### - Yolov7 Train/Fine-tune/Validate/Inference
+  - Train & Fine-tune Yolov7 model
+    - Jointly learning of CrowdHuman, Safety Helmet Dataset (refet to cache_labels method in '/utils/dataset.py')
+    - Caution! OTA (Optimal Transport Assignment for Object Detection) loss likeyly to cause GPU memory overflow when maximum length of label is very long (e.g. 782 in CrowdHuman)
+    - This problem can be addressed by modifying the parameters of the configuration file to limit the maximum length of label or not use OTA loss.
+      - Limiting the maximum length of label: e.g. set 'cut_max_len' parameter as 200 in human_custom.yaml
+      - Not use OTA loss: e.g. set 'loss_ota' parameter as 1 in hyp.scratch.human_custom.yaml
 
-#### - YoloX TensorRT Engine
-- Convert YoloX Pytorch weigths to TensorRT engine
-- Real-time inference with YoloX TensorRT engine
+  - Validate & Inference Yolov7 model
+
+    <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="30%"></img> 
+    <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="30%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="30%"></img> 
+    <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="30%"></img>
+
+#### - Convert & Inference Yolov7 TensorRT Engine
+- Convert Yolov7 Pytorch weigths to TensorRT engine: FP16, INT8 calibration
+- Faster inference of Yolov7 TensorRT engine
 
 #### - Config files
-- yolox_config.ini: yoloX model parameters
-- train_config.ini: yoloX train parameters
-- tensorrt_config.ini: yoloX tensorrt parameters
+- Build config for joint learning of two human dataset
 
 Docker Environments
 =============
@@ -43,129 +62,190 @@ Docker Environments
 #### - Pull docker environment
 
 ```
-docker pull qbxlvnf11docker/yolox_tensorrt
+docker pull qbxlvnf11docker/yolov7_tensorrt
 ```
 
 #### - Run docker environment
 
 ```
-nvidia-docker run -it -p 9000:9000 -e GRANT_SUDO=yes --user root --name yolox_tensorrt -v {folder}:/workspace -w /workspace qbxlvnf11docker/yolox_tensorrt bash
+nvidia-docker run -it --gpus all --name yolov7_tensorrt --shm-size=64G -p 8844:8844 -e GRANT_SUDO=yes --user root -v {data_folder}:/workspace/data -v {yolov7_folder}:/workspace/yolov7 -w /workspace/yolov7 qbxlvnf11docker/yolov7_tensorrt bash
 ```
 
 How to use
 =============
 
-#### - Train: training or fine-tuning YoloX
-  - Params: refer to '../config/train_config.ini', '../config/yolox_config.ini' config files and parse_args() of 'main.py'
 
-```
-python main.py --mode yolox-train
-```
+#### - Train Yolov7: Pre-Train or Fine-Tuning
+  - COCO pretrained: P5 & P6
 
-#### - Inference: detecting object with pretrained YoloX
-  - Params: refer to three config files and parse_args() of 'main.py'
-  - TensorRT engine inference: set tensorrt_mode config of '../config/tensorrt_config.ini' as 'yes' after build YoloX TensorRT engines
-
-```
-python main.py --mode yolox-detection-img
-```
-
-#### - Building YoloX TensorRT Engines
-  - Params: refer to '../config/yolox_config.ini' config file and parse_args() of '../yolox_convert_tensorrt_engines/build_yolox_trt_engine.py'
-
-```
-python yolox_convert_tensorrt_engines/build_yolox_trt_engine.py
-```
-
-Train with Custom Dataset
-=============
-
-#### - Build Dataset
+  ```
+  python train.py --workers 8 --device 0 --batch-size 16 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7-coco-custom --hyp data/hyp.scratch.custom.yaml --epochs 300
+  ```
   
-1. Building Custom Dataset Class
-  - Building dataset class py file in '../yolox/data/datasets'
+  ```
+  python train_aux.py --workers 8 --device 0 --batch-size 8 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7-w6.yaml --weights '' --name yolov7-w6-coco-custom --hyp data/hyp.scratch.custom.yaml --epochs 300
+  ```
+
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune: P5 & P6
+
+  ```
+  python train.py --workers 8 --device 0 --batch-size 16 --data data/human_custom.yaml --img 640 640 --cfg cfg/training/yolov7-custom.yaml --weights ./weights/yolov7.pt --name yolov7-human-custom --hyp data/hyp.scratch.human_custom.yaml --epochs 100
+  ```
+
+  ```
+  python train_aux.py --workers 8 --device 0 --batch-size 2 --data data/human_w6_custom.yaml --img 640 640 --cfg cfg/training/yolov7-w6-custom.yaml --weights ./weights/yolov7-w6.pt --name yolov7-w6-human-custom --hyp data/hyp.scratch.human_custom.yaml --epochs 100
+  ```
+
+#### - Test Yolov7: Confusion Matrix, F1/PR/P/R Curve etc.
+  - COCO pretrained Weights
+
+  ```
+  python test.py --data data/coco_custom.yaml --img 640 --batch 16 --conf 0.001 --iou 0.65 --device 0 --weights ./weights/yolov7.pt --name yolov7_coco_val --no-trace
+  ```
   
-2. Import Custom Dataset Class
-  - Writing import code in '../yolox/data/datasets/__init__.py'
-  - Writing import code in get_data_loader, get_eval_loader function of '../yolox/exp/yolox_base.py'
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune Weights
+
+  ```
+  python test.py --data data/human_custom.yaml --img 640 --batch 16 --conf 0.001 --iou 0.65 --device 0 --weights ./weights/yolov7_human.pt --name yolov7_human_val --no-trace
+  ```
+
+#### - Building Yolov7 ONNX
+  - For inference: add '--max-wh 640'
+  - COCO pretrained Weights
+
+  ```
+  python export_onnx.py --weights ./weights/yolov7.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
+  ```
   
-3. Define Custom Dataset Class
-  - Defining dataset class in get_data_loader, get_eval_loader function of '../yolox/exp/yolox_base.py'
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune Weights
 
-#### - Config Setting
+  ```
+  python export_onnx.py --weights ./weights/yolov7_human.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
+  ```
 
-1. Set follow configs of '../config/train_config.ini'
-  - dataset_name: choosing custom dataset
-  - data_dir: custom data folder path
+#### - Building Yolov7 FP16 TensorRT Engines (ONNX to TensorRT)
+  - COCO pretrained ONNX
 
-2. Set follow config of '../config/yolox_config.ini'
-  - object_class_names_list_path: class names file path
-  - Add class names that does not exist in the existing class names list or change class names file
+  ```
+  python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_FP16.trt -p fp16
+  ```
+  
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune ONNX
+  
+  ```
+  python ./tensorrt-python/export_trt.py -o ./weights/yolov7_human.onnx -e ./weights/yolov7_human_FP16.trt -p fp16
+  ```
 
-#### - Refer to 'CrowdHumanDataset' custom dataset class
+#### - Building Yolov7 INT8 Calibration TensorRT Engines (ONNX to TensorRT)
+  - COCO pretrained ONNX
 
-Transfer Learning (Fine-Tune)
-=============
+  ```
+  python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
+  ```
+  
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune ONNX
+  
+  ```
+  python ./tensorrt-python/export_trt.py -o ./weights/yolov7_human.onnx -e ./weights/yolov7_human_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
+  ```
 
-#### - Three modes of Fine-Tune
+#### - Pytorch Inference: detecting object with pretrained Yolov7
+  - COCO pretrained Weights
 
-1. Load weights of all layers
-  - Set fine_tune_mode config of '../config/train_config.ini' as 'yes'
+  ```
+  python detect.py --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
+  ```
+  
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune Weights
+  
+  ```
+  python detect.py --weights ./weights/yolov7_human.pt --conf 0.4 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
+  ```
 
-2. Load only weights of DarkNet
-  - Set fine_tune_mode config of '../config/train_config.ini' as 'yes'
-  - Set only_backbone_weight_load_mode config of '../config/train_config.ini' as 'yes'
+#### - ONNX Inference: detecting object with Yolov7 ONNX
+  - COCO pretrained ONNX
+  
+  ```
+  python detect.py --onnx-inf --onnx-path ./weights/yolov7.onnx --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
+  ```
 
-3. Load weights of DarkNet and head's layers except for last layer
-  - Set fine_tune_mode config of '../config/train_config.ini' as 'yes'
-  - Set except_predict_layer_weight_load_mode config of '../config/train_config.ini' as 'yes'
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune ONNX
+
+  ```
+  python detect.py --onnx-inf --onnx-path ./weights/yolov7_human.onnx --weights ./weights/yolov7_human.pt --conf 0.4 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
+  ```
+
+#### - FP16 TRT Inference: detecting object with Yolov7 FP16 TensorRT engine
+  - COCO pretrained TRT
+  
+  ```
+  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_FP16.trt --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
+  ```
+
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune TRT
+
+  ```
+  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_FP16.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
+  ```
+
+#### - INT8 TRT Inference: detecting object with Yolov7 INT8 Calibration TensorRT engine
+  - COCO pretrained TRT
+  
+  ```
+  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_INT8.trt --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
+  ```
+
+  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune TRT
+
+  ```
+  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_INT8.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
+  ```
 
 Download Weights & TensorRT Engine
 =============
 
-#### - Download COCO pretrained weights of YoloX
+#### - Download COCO pretrained weights of Yolov7
 
-https://github.com/Megvii-BaseDetection/YOLOX
+https://github.com/WongKinYiu/yolov7
 
-#### - Download Crowd Human Dataset fine-tuned weights and TensorRT engine of YoloX
+#### - Download fine-tuned weights and TensorRT engine of Yolov7
   - Password: 1234
   
-http://naver.me/5SavC6wN
+http://naver.me/5bdUjMvg
 
-References
+Public Datasets for Building Custom Human Detection Dataset
 =============
-
-#### - YoloX paper
-```
-@article{yolox,
-  title={YOLOX: Exceeding YOLO Series in 2021},
-  author={Zheng Ge, Songtao Liu, Feng Wang, Zeming Li, Jian Sun},
-  journal = {arXiv},
-  year={2021}
-}
-```
-
-#### - YoloX Pytorch
-
-https://github.com/Megvii-BaseDetection/YOLOX
-
-#### - Yolox TensorRT engine
-
-https://github.com/Megvii-BaseDetection/YOLOX/blob/main/tools/trt.py
-
-#### - torch2trt
-
-https://github.com/NVIDIA-AI-IOT/torch2trt
-
-#### - Inference TensorRT engine
-
-https://github.com/qbxlvnf11/convert-pytorch-onnx-tensorrt
 
 #### - Crowd Human Dataset
 
 https://www.crowdhuman.org/
 
 https://www.crowdhuman.org/download.html
+
+#### - Safety Helmet detection with Extended Labels (SHEL) Dataset
+
+https://data.mendeley.com/datasets/9rcv8mm682/2
+
+References
+=============
+
+#### - Yolov7 paper
+```
+@article{Yolov7,
+  title={YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors},
+  author={Chien-Yao Wang, Alexey Bochkovskiy, and Hong-Yuan Mark Liao Institute of Information Science, Academia Sinica, Taiwan},
+  journal = {arXiv},
+  year={2022}
+}
+```
+
+#### - Yolov7 Pytorch & TensorRT
+
+https://github.com/WongKinYiu/yolov7
+
+#### - torch2trt
+
+https://github.com/NVIDIA-AI-IOT/torch2trt
 
 Author
 =============
