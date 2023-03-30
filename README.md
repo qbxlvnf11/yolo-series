@@ -60,11 +60,11 @@ Contents
 - Build config for joint learning of two human dataset
 
 
-Code & Custom Human Detection Dataset structures
+Structures of Folders: Code & Custom Human Detection Dataset
 =============
 
 ```
-|-- root folder of codes
+|-- code
 |-- data
             |   |-- train_total_data_path_list.txt    
             |   |-- valid_total_data_path_list.txt
