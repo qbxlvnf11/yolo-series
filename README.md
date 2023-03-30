@@ -64,10 +64,10 @@ Structures of Project Folders
 =============
 
 ```
-|-- code
+${CODE_ROOT}
             |   |-- train.py
             |   |-- ...
-|-- data
+${DATA_ROOT}
             |   |-- train_total_data_path_list.txt    
             |   |-- valid_total_data_path_list.txt
             |   |-- CrowdHuman
