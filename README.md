@@ -1,6 +1,12 @@
 Description
 =============
 
+<img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="45%"></img> 
+<img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="45%"></img>
+
+<img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="45%"></img> 
+<img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="45%"></img>
+
 #### - Yolo object detector series of various version (refer to each branch or tag)
 
 #### - Contributions of Yolov7
@@ -43,12 +49,6 @@ Contents
       - Not use OTA loss: e.g. set 'loss_ota' parameter as 1 in hyp.scratch.human_custom.yaml
 
   - Validate & Inference Yolov7 model
-
-    <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="45%"></img> 
-    <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="45%"></img>
-    
-    <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="45%"></img> 
-    <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="45%"></img>
 
 #### - Convert & Inference Yolov7 TensorRT Engine
 - Convert Yolov7 Pytorch weigths to TensorRT engine: FP16, INT8 calibration
