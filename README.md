@@ -231,6 +231,10 @@ http://naver.me/5bdUjMvg
 Public Datasets for Building Custom Human Detection Dataset
 =============
 
+#### - Data path list txt
+  - Train: './data/train_total_data_path_list.txt'
+  - Valid: './data/valid_total_data_path_list.txt'
+
 #### - Crowd Human Dataset
 
 https://www.crowdhuman.org/
