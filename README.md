@@ -14,19 +14,19 @@ Description
   - Characteristic
     - E-ELAN Architecture
 
-    <img src="https://user-images.githubusercontent.com/52263269/228470825-01baf4f0-c06f-480b-8e64-003f99ab17f4.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228470825-01baf4f0-c06f-480b-8e64-003f99ab17f4.png" width="80%"></img>
 
     - Model Scaling for Concatenation-Based Model Architecture
 
-    <img src="https://user-images.githubusercontent.com/52263269/228469230-30ff0446-7d33-4cb8-8511-7a466a16b890.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228469230-30ff0446-7d33-4cb8-8511-7a466a16b890.png" width="80%"></img>
 
     - Planned re-parameterized convolution
 
-    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="80%"></img>
 
     - Coarse for auxiliary and fine for lead loss
 
-    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="50%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="80%"></img>
 
 
 Contents
@@ -44,10 +44,13 @@ Contents
 
   - Validate & Inference Yolov7 model
 
-    <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="30%"></img> 
-    <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="30%"></img>
-    <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="30%"></img> 
-    <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="30%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="40%"></img> 
+    
+    <img src="https://user-images.githubusercontent.com/52263269/228700447-7c625fa1-09ba-4982-a233-c0631c31d25b.jpg" width="40%"></img>
+    
+    <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="40%"></img> 
+    
+    <img src="https://user-images.githubusercontent.com/52263269/228702485-8784d840-e686-4492-9c08-a7207500ced3.jpg" width="40%"></img>
 
 #### - Convert & Inference Yolov7 TensorRT Engine
 - Convert Yolov7 Pytorch weigths to TensorRT engine: FP16, INT8 calibration
@@ -86,7 +89,7 @@ How to use
   python train_aux.py --workers 8 --device 0 --batch-size 8 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7-w6.yaml --weights '' --name yolov7-w6-coco-custom --hyp data/hyp.scratch.custom.yaml --epochs 300
   ```
 
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune: P5 & P6
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune: P5 & P6
 
   ```
   python train.py --workers 8 --device 0 --batch-size 16 --data data/human_custom.yaml --img 640 640 --cfg cfg/training/yolov7-custom.yaml --weights ./weights/yolov7.pt --name yolov7-human-custom --hyp data/hyp.scratch.human_custom.yaml --epochs 100
@@ -103,7 +106,7 @@ How to use
   python test.py --data data/coco_custom.yaml --img 640 --batch 16 --conf 0.001 --iou 0.65 --device 0 --weights ./weights/yolov7.pt --name yolov7_coco_val --no-trace
   ```
   
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune Weights
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune Weights
 
   ```
   python test.py --data data/human_custom.yaml --img 640 --batch 16 --conf 0.001 --iou 0.65 --device 0 --weights ./weights/yolov7_human.pt --name yolov7_human_val --no-trace
@@ -117,33 +120,45 @@ How to use
   python export_onnx.py --weights ./weights/yolov7.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
   ```
   
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune Weights
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune Weights
 
   ```
   python export_onnx.py --weights ./weights/yolov7_human.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
   ```
 
 #### - Building Yolov7 FP16 TensorRT Engines (ONNX to TensorRT)
+  - Clone tensorrt-python reposit
+  
+  ```
+  git clone https://github.com/Linaom1214/tensorrt-python.git
+  ```
+  
   - COCO pretrained ONNX
 
   ```
   python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_FP16.trt -p fp16
   ```
   
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune ONNX
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune ONNX
   
   ```
   python ./tensorrt-python/export_trt.py -o ./weights/yolov7_human.onnx -e ./weights/yolov7_human_FP16.trt -p fp16
   ```
 
 #### - Building Yolov7 INT8 Calibration TensorRT Engines (ONNX to TensorRT)
-  - COCO pretrained ONNX
+  - Clone tensorrt-python reposit
+  
+  ```
+  git clone https://github.com/Linaom1214/tensorrt-python.git
+  ```
+  
+- COCO pretrained ONNX
 
   ```
   python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
   ```
   
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune ONNX
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune ONNX
   
   ```
   python ./tensorrt-python/export_trt.py -o ./weights/yolov7_human.onnx -e ./weights/yolov7_human_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
@@ -156,7 +171,7 @@ How to use
   python detect.py --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
   ```
   
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune Weights
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune Weights
   
   ```
   python detect.py --weights ./weights/yolov7_human.pt --conf 0.4 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
@@ -169,7 +184,7 @@ How to use
   python detect.py --onnx-inf --onnx-path ./weights/yolov7.onnx --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
   ```
 
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune ONNX
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune ONNX
 
   ```
   python detect.py --onnx-inf --onnx-path ./weights/yolov7_human.onnx --weights ./weights/yolov7_human.pt --conf 0.4 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
@@ -182,7 +197,7 @@ How to use
   python detect.py --trt-inf --trt-engine-path ./weights/yolov7_FP16.trt --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
   ```
 
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune TRT
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune TRT
 
   ```
   python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_FP16.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
@@ -195,7 +210,7 @@ How to use
   python detect.py --trt-inf --trt-engine-path ./weights/yolov7_INT8.trt --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
   ```
 
-  - COCO pretrained + Custom Human Detection Dataset (CrowdHuman, Safety Helmet Dataset) Fine-Tune TRT
+  - COCO pretrained + Custom Human Detection Dataset Fine-Tune TRT
 
   ```
   python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_INT8.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
