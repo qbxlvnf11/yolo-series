@@ -22,11 +22,11 @@ Description
 
     - Planned re-parameterized convolution
 
-    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="60%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="50%"></img>
 
     - Coarse for auxiliary and fine for lead loss
 
-    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="100%"></img>
+    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="90%"></img>
 
 
 Contents
