@@ -60,11 +60,13 @@ Contents
 - Build config for joint learning of two human dataset
 
 
-Structures of Folders: Code & Custom Human Detection Dataset
+Structures of Project Folders
 =============
 
 ```
 |-- code
+            |   |-- train.py
+            |   |-- ...
 |-- data
             |   |-- train_total_data_path_list.txt    
             |   |-- valid_total_data_path_list.txt
@@ -82,10 +84,10 @@ Structures of Folders: Code & Custom Human Detection Dataset
 ```
 
 
-Public Datasets for Building Custom Human Detection Dataset
+Custom Human Detection Dataset
 =============
 
-#### - Data path list txt
+#### - Path of data_path_list.txt
   - Train: './data/train_total_data_path_list.txt'
   - Valid: './data/valid_total_data_path_list.txt'
 
