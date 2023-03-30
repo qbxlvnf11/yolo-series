@@ -59,6 +59,60 @@ Contents
 #### - Config files
 - Build config for joint learning of two human dataset
 
+
+Code & Custom Human Detection Dataset structures
+=============
+
+```
+|-- root folder of codes
+|-- data
+            |   |-- train_total_data_path_list.txt    
+            |   |-- valid_total_data_path_list.txt
+            |   |-- CrowdHuman
+            |   |   |   |-- CrowdHuman_train01
+            |   |   |   |-- CrowdHuman_train02
+            |   |   |   |-- CrowdHuman_train03
+            |   |   |   |-- CrowdHuman_val
+            |   |   |   |-- CrowdHuman_test
+            |   |   |   |-- annotation_train.odgt
+            |   |   |   |-- annotation_val.odgt
+            |   |-- Safety_Helmet_Detection_with_Extended_Labels
+            |   |   |   |-- Images
+            |   |   |   |-- Annotations
+```
+
+
+Public Datasets for Building Custom Human Detection Dataset
+=============
+
+#### - Data path list txt
+  - Train: './data/train_total_data_path_list.txt'
+  - Valid: './data/valid_total_data_path_list.txt'
+
+#### - Crowd Human Dataset
+
+https://www.crowdhuman.org/
+
+https://www.crowdhuman.org/download.html
+
+#### - Safety Helmet detection with Extended Labels (SHEL) Dataset
+
+https://data.mendeley.com/datasets/9rcv8mm682/2
+
+
+Download Weights & TensorRT Engine
+=============
+
+#### - Download COCO pretrained weights of Yolov7
+
+https://github.com/WongKinYiu/yolov7
+
+#### - Download fine-tuned weights and TensorRT engine of Yolov7
+  - Password: 1234
+  
+http://naver.me/5bdUjMvg
+
+
 Docker Environments
 =============
 
@@ -74,9 +128,9 @@ docker pull qbxlvnf11docker/yolov7_tensorrt
 nvidia-docker run -it --gpus all --name yolov7_tensorrt --shm-size=64G -p 8844:8844 -e GRANT_SUDO=yes --user root -v {data_folder}:/workspace/data -v {yolov7_folder}:/workspace/yolov7 -w /workspace/yolov7 qbxlvnf11docker/yolov7_tensorrt bash
 ```
 
+
 How to use
 =============
-
 
 #### - Train Yolov7: Pre-Train or Fine-Tuning
   - COCO pretrained: P5 & P6
@@ -216,34 +270,6 @@ How to use
   python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_INT8.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
   ```
 
-Download Weights & TensorRT Engine
-=============
-
-#### - Download COCO pretrained weights of Yolov7
-
-https://github.com/WongKinYiu/yolov7
-
-#### - Download fine-tuned weights and TensorRT engine of Yolov7
-  - Password: 1234
-  
-http://naver.me/5bdUjMvg
-
-Public Datasets for Building Custom Human Detection Dataset
-=============
-
-#### - Data path list txt
-  - Train: './data/train_total_data_path_list.txt'
-  - Valid: './data/valid_total_data_path_list.txt'
-
-#### - Crowd Human Dataset
-
-https://www.crowdhuman.org/
-
-https://www.crowdhuman.org/download.html
-
-#### - Safety Helmet detection with Extended Labels (SHEL) Dataset
-
-https://data.mendeley.com/datasets/9rcv8mm682/2
 
 References
 =============
@@ -265,6 +291,7 @@ https://github.com/WongKinYiu/yolov7
 #### - torch2trt
 
 https://github.com/NVIDIA-AI-IOT/torch2trt
+
 
 Author
 =============
