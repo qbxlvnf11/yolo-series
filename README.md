@@ -94,6 +94,7 @@ Custom Human Detection Dataset
 =============
 
 #### - Path of data_path_list.txt
+  - Build data path list file: https://github.com/qbxlvnf11/data-preprocessing-methods/blob/master/Utils/build_dataset_path_file.ipynb
   - Train: './data/train_total_data_path_list.txt'
   - Valid: './data/valid_total_data_path_list.txt'
 
