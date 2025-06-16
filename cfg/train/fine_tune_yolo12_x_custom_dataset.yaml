@@ -1,0 +1,21 @@
+## Train/val/test sets as 1) dir: path/to/imgs, 2) file: path/to/imgs.txt, or 3) list: [path/to/imgs1, path/to/imgs2, ..]
+## Dataset root dir
+path: custom_labeling_coco_format
+train: images/train
+val: images/train
+device: 0
+
+## Classes
+names:
+  0: person
+
+imgsz: 640
+epochs: 100
+batch_size: 16 #8 #16
+
+## Detection
+detection:
+  ## yolo_world/<version>: s, m, l, x, v2-s, v2-m, v2-l, v2-x
+  #yolo_world_model_id: "yolo_world/v2-l"
+  ## Pre-train weights: "yolo12n.pt", "yolo12s.pt", "yolo12m.pt", "yolo12l.pt", "yolo12x.pt"
+  ultralytics_model_weights: "weights/yolo12x.pt"

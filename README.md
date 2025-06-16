@@ -37,36 +37,36 @@ Structures of Project Folders
 
 #### - CrowdHuman
 
-    - 'datasets/CrowdHuman'
-        - Original dataset folder of CrowdHuman
+  - 'datasets/CrowdHuman'
+    - Original dataset folder of CrowdHuman
 
-    - 'datasets/CrowdHuman_coco_format'
-        - Preprocessing dataset folder of CrowdHuman for Ultralytics train format
-        - Run 'python datasets/CrowdHuman_convertor.py'
+  - 'datasets/CrowdHuman_coco_format'
+    - Preprocessing dataset folder of CrowdHuman for Ultralytics train format
+    - Run 'python datasets/CrowdHuman_convertor.py'
 
 #### - Safety Helmet Dataset
 
-    - 'datasets/Safety_Helmet_Detection_with_Extended_Labels'
-        - Original dataset folder of Safety Helmet Dataset
+  - 'datasets/Safety_Helmet_Detection_with_Extended_Labels'
+    - Original dataset folder of Safety Helmet Dataset
 
-    - 'datasets/Safety_Helmet_Detection_with_Extended_Labels_coco_format'
-        - Preprocessing dataset folder of Safety Helmet Dataset for Ultralytics train format
-        - Run 'python datasets/CrowdHuman_convertor.py'
+  - 'datasets/Safety_Helmet_Detection_with_Extended_Labels_coco_format'
+    - Preprocessing dataset folder of Safety Helmet Dataset for Ultralytics train format
+    - Run 'python datasets/CrowdHuman_convertor.py'
 
 #### - Multi Dataset
 
-    - 'datasets/multi_dataset'
-        - preprocessing dataset folder of multi dataset for Ultralytics train format
-        - Building it by concataneting many preprocessing dataset
+  - 'datasets/multi_dataset'
+    - preprocessing dataset folder of multi dataset for Ultralytics train format
+    - Building it by concataneting many preprocessing dataset
 
 #### - Custom Dataset
 
-    - 'datasets/custom_labeling'
-        - Original dataset folder of custom dataset with Anylabeling
+  - 'datasets/custom_labeling'
+    - Original dataset folder of custom dataset with Anylabeling
 
-    - 'datasets/custom_labeling_coco_format'
-        - preprocessing dataset folder of custom dataset for Ultralytics train format
-        - Run 'python datasets/auto_label_convertor.py'
+  - 'datasets/custom_labeling_coco_format'
+    - preprocessing dataset folder of custom dataset for Ultralytics train format
+    - Run 'python datasets/auto_label_convertor.py'
 
         
 ```
@@ -145,8 +145,8 @@ Build & Preprocssing Dataset
 
 #### - CrowdHuman Dataset Preprocessing
 
-    - Convert to COCO Format to train model
-    - Class setting: {"person": 0, "head": 80} (Refer to Line 11)
+  - Convert to COCO Format to train model
+  - Class setting: {"person": 0, "head": 80} (Refer to Line 11)
 
 ```
 python datasets/CrowdHuman_convertor.py 
@@ -154,8 +154,8 @@ python datasets/CrowdHuman_convertor.py
 
 #### - Safety Helmet Dataset Preprocessing
 
-    - Convert to COCO Format to train model
-    - Class setting: {"person_no_helmet": 0, "person_with_helmet": 0, "head": 80, "head_with_helmet": 81, "helmet": 82} (Refer to Line 12)
+  - Convert to COCO Format to train model
+  - Class setting: {"person_no_helmet": 0, "person_with_helmet": 0, "head": 80, "head_with_helmet": 81, "helmet": 82} (Refer to Line 12)
 
 ```
 python datasets/safety_helmet_detection_dataset_convertor.py
@@ -163,17 +163,17 @@ python datasets/safety_helmet_detection_dataset_convertor.py
 
 #### - Build Nulti Dataset
 
-    - Concatanete Preprocessing CrowdHuman Dataset folder and Preprocessing Safety Helmet Dataset folder
+  - Concatanete Preprocessing CrowdHuman Dataset folder and Preprocessing Safety Helmet Dataset folder
 
 #### - Custom Dataset Labeling
 
-    - Using Anylabeling labeling tools: [Anylabeling](https://github.com/vietanhdev/anylabeling)
-    - How to use Anylabeling: [How to use Anylabeling](https://github.com/qbxlvnf11/SAM2-based-semi-auto-labeling)
+  - Using Anylabeling labeling tools: [Anylabeling](https://github.com/vietanhdev/anylabeling)
+  - How to use Anylabeling: [How to use Anylabeling](https://github.com/qbxlvnf11/SAM2-based-semi-auto-labeling)
 
 #### - Build Custom Dataset
 
-    - Convert to COCO Format to train model
-    - Class setting: {"person_no_helmet": 0, "person_with_helmet": 0, "head": 80, "head_with_helmet": 81, "helmet": 82} (Refer to Line 12)
+  - Convert to COCO Format to train model
+  - Class setting: {"person_no_helmet": 0, "person_with_helmet": 0, "head": 80, "head_with_helmet": 81, "helmet": 82} (Refer to Line 12)
 
 ```
 python datasets/auto_label_convertor.py
@@ -191,9 +191,9 @@ nano /root/.config/Ultralytics/settings.json
 Run YOLO 11 & 12 Model
 =============
    
-    - Pre-train weights: "yolo11n.pt", "yolo11s.pt", "yolo11m.pt", "yolo11l.pt", "yolo11x.pt", ...
+  - Pre-train weights: "yolo11n.pt", "yolo11s.pt", "yolo11m.pt", "yolo11l.pt", "yolo11x.pt", ...
 
-    - Fine-Tuning 
+  - Fine-Tuning 
         - yolo_12_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo12_x_crowd_human.yaml'
         - yolo_12_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo12_x_safety_helmat.yaml'
         - yolo_12_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo12_x_human_dataset.yaml'
@@ -207,7 +207,7 @@ Run YOLO 11 & 12 Model
 python fine_tuning.py --config {config_path}
 ```
    
-    - inference
+  - inference
         - 'demo_yolo11.yaml'
 
 ```

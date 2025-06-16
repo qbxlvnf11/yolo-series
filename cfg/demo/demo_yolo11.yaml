@@ -1,0 +1,48 @@
+# log_path: "log.txt"
+# font_path: "/usr/share/fonts/truetype/nanum/NanumBarunGothic.ttf"
+
+video_list:
+  - "./datasets/test.mp4"
+
+fps: 5
+save_raw: false
+save_vis: false
+save_video: false
+save_cropped_person: false
+#vis_thread_timeout_duration: 20
+
+### Model
+## Options: "ultralytics/ultralytics", "ultralytics/mp_pose", "yolo_world/deep_sort/mp_pose"
+model_version: "ultralytics/ultralytics" 
+input_shape:
+  width: 640
+  height: 640
+
+## Detection
+detection:
+  ## yolo_world/<version>: s, m, l, x, v2-s, v2-m, v2-l, v2-x
+  #yolo_world_model_id: "yolo_world/v2-l"
+  ## Pre-train weights: "yolo12n.pt", "yolo12s.pt", "yolo12m.pt", "yolo12l.pt", "yolo12x.pt"
+  ultralytics_fine_tuning_model_weights: "weights/yolo11x.pt"
+  max_det: 150
+  classes:
+    - "person"
+  detection_iou_thr: 0.4
+  confidence_threshold: 0.4
+
+### Tracking
+tracking:
+  working: true
+  # max_age: 30
+  # nms_max_overlap: 0.6
+  # reset_seconds: 10
+  yaml_file: "bytetrack.yaml"
+
+### Pose estimation
+pose_estimation:
+  working: true
+  ## Options: "yolo11n-pose.pt", "yolo11s-pose.pt", "yolo11m-pose.pt", "yolo11l-pose.pt", "yolo11x-pose.pt"
+  ## Options: "yolo12n-pose.pt", "yolo12s-pose.pt", "yolo12m-pose.pt", "yolo12l-pose.pt", "yolo12x-pose.pt"
+  ultralytics_pose_model_weights: "weights/yolo11x-pose.pt"
+  tracking_confidence: 0.3
+  confidence_threshold: 0.2
