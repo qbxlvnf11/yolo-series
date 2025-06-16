@@ -143,6 +143,12 @@ ${CODE_ROOT}
 Build & Preprocssing Dataset
 =============
 
+#### - Ultralytics Settings
+
+```
+nano /root/.config/Ultralytics/settings.json
+```
+
 #### - CrowdHuman Dataset Preprocessing
 
   - Convert to COCO Format to train model
@@ -180,28 +186,20 @@ python datasets/auto_label_convertor.py
 ```
 
 
-Ultralytics Settings
-=============
-
-```
-nano /root/.config/Ultralytics/settings.json
-```
-
-
 Run YOLO 11 & 12 Model
 =============
    
   - Pre-train weights: "yolo11n.pt", "yolo11s.pt", "yolo11m.pt", "yolo11l.pt", "yolo11x.pt", ...
 
   - Fine-Tuning 
-        - yolo_12_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo12_x_crowd_human.yaml'
-        - yolo_12_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo12_x_safety_helmat.yaml'
-        - yolo_12_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo12_x_human_dataset.yaml'
-        - yolo_12_x using Custom Dataset: 'cfg/train/fine_tune_yolo12_x_custom_dataset.yaml'
-        - yolo_11_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo11_x_crowd_human.yaml'
-        - yolo_11_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo11_x_safety_helmat.yaml'
-        - yolo_11_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo11_x_human_dataset.yaml'
-        - yolo_11_x using Custom Dataset: 'cfg/train/fine_tune_yolo11_x_custom_dataset.yaml'
+    - yolo_12_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo12_x_crowd_human.yaml'
+    - yolo_12_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo12_x_safety_helmat.yaml'
+    - yolo_12_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo12_x_human_dataset.yaml'
+    - yolo_12_x using Custom Dataset: 'cfg/train/fine_tune_yolo12_x_custom_dataset.yaml'
+    - yolo_11_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo11_x_crowd_human.yaml'
+    - yolo_11_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo11_x_safety_helmat.yaml'
+    - yolo_11_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo11_x_human_dataset.yaml'
+    - yolo_11_x using Custom Dataset: 'cfg/train/fine_tune_yolo11_x_custom_dataset.yaml'
 
 ```
 python fine_tuning.py --config {config_path}
