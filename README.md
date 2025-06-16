@@ -1,312 +1,227 @@
-Description
-=============
-
-#### - Yolo object detector series of various version (refer to each branch or tag)
-
-#### - Contributions of Yolov7
-  - Several trainable bag-of-freebies methods are designed to improve the performance of real-time object detection without increasing inference cost.
-  - For the development of detection methods, the following two issues were discovered and solutions were proposed. (1) How can the original module be replaced with a re-parameterized module? (2) How dynamic label assignment strategy deals with assignment to different output layers.
-  - "extend" and "compound scaling" methods are proposed so that real-time object detectors can efficiently utilize parameters and computations.
-  - The proposed Yolov7 maintained high performance despite reducing parameters by about 40% and computation by about 50%.
-
-#### - Summary of Yolov7 Mechanism
-  - Blog post link: https://blog.naver.com/qbxlvnf11/223056418459
-  - Characteristic
-    - E-ELAN Architecture
-
-    <img src="https://user-images.githubusercontent.com/52263269/228470825-01baf4f0-c06f-480b-8e64-003f99ab17f4.png" width="90%"></img>
-
-    - Model Scaling for Concatenation-Based Model Architecture
-
-    <img src="https://user-images.githubusercontent.com/52263269/228469230-30ff0446-7d33-4cb8-8511-7a466a16b890.png" width="90%"></img>
-
-    - Planned re-parameterized convolution
-
-    <img src="https://user-images.githubusercontent.com/52263269/228472239-500dc738-de9d-433a-a554-d723326d7794.png" width="50%"></img>
-
-    - Coarse for auxiliary and fine for lead loss
-
-    <img src="https://user-images.githubusercontent.com/52263269/228472541-7494916c-7743-4c5a-888e-aebcb4bfb99c.png" width="90%"></img>
-
-
 Contents
 =============
 
-#### - Modify Yolov7 code in [Yolov7 official repository](https://github.com/WongKinYiu/yolov7) to make object detector optimize for human detection (jointly learning of CrowdHuman, Safety Helmet Dataset)
+#### - [Ultralytics Yolo11](https://docs.ultralytics.com/ko/models/yolo11/)
 
-#### - Yolov7 Train/Fine-tune/Validate/Inference
-  - Train & Fine-tune Yolov7 model
-    - Fine-tune with custom human detection dataset: jointly learning of CrowdHuman, Safety Helmet Dataset (refet to cache_labels method in '/utils/dataset.py')
-    - Caution! OTA (Optimal Transport Assignment for Object Detection) loss likeyly to cause GPU memory overflow when maximum length of label is very long (e.g. 782 in CrowdHuman)
-    - This problem can be addressed by modifying the parameters of the configuration file to limit the maximum length of label or not use OTA loss.
-      - Limiting the maximum length of label: e.g. set 'cut_max_len' parameter as 200 in human_custom.yaml
-      - Not use OTA loss: e.g. set 'loss_ota' parameter as 1 in hyp.scratch.human_custom.yaml
+#### - [Ultralytics Yolo11 Solutions](https://docs.ultralytics.com/ko/solutions/)
 
-  - Test & Inference Yolov7 model
-    - Test: Confusion Matrix, F1/PR/P/R Curve etc.
-    - Inference: Detect objects in image
-    
-  <img src="https://user-images.githubusercontent.com/52263269/228701002-7795546e-caa8-4667-9409-a1ec6e161a58.jpg" width="45%"></img> 
-  <img src="https://user-images.githubusercontent.com/52263269/228789206-1a74bd24-4e04-4994-9149-de13a4147689.jpg" width="45%"></img>
+#### - [Yolov11 Github](https://github.com/ultralytics/ultralytics)
 
-  <img src="https://user-images.githubusercontent.com/52263269/228702551-36043d61-931d-4322-ac20-112d7f6cf3ad.jpg" width="45%"></img> 
-  <img src="https://user-images.githubusercontent.com/52263269/228789590-c0e71d8e-c331-4add-b929-a14f19a4d136.jpg" width="45%"></img>
+#### - [Ultralytics Yolo12](https://docs.ultralytics.com/ko/models/yolo12)
 
-#### - Convert & Inference Yolov7 TensorRT Engine
-- Convert Yolov7 Pytorch weigths to TensorRT engine: FP16, INT8 calibration
-- Faster inference of Yolov7 TensorRT engine
-
-#### - Config files
-- Build config for joint learning of two human dataset
-
-
-Structures of Project Folders
-=============
-
-```
-${CODE_ROOT}
-            |   |-- train.py
-            |   |-- ...
-${DATA_ROOT}
-            |   |-- train_total_data_path_list.txt    
-            |   |-- valid_total_data_path_list.txt
-            |   |-- CrowdHuman
-            |   |   |   |-- CrowdHuman_train01
-            |   |   |   |-- CrowdHuman_train02
-            |   |   |   |-- CrowdHuman_train03
-            |   |   |   |-- CrowdHuman_val
-            |   |   |   |-- CrowdHuman_test
-            |   |   |   |-- annotation_train.odgt
-            |   |   |   |-- annotation_val.odgt
-            |   |-- Safety_Helmet_Detection_with_Extended_Labels
-            |   |   |   |-- Images
-            |   |   |   |-- Annotations
-            |   |-- COCO2017
-            |   |   |   |-- images
-            |   |   |   |-- labels
-            |   |   |   |-- train2017.txt
-            |   |   |   |-- val2017.txt
-            |   |   |   |-- test-dev2017.txt
-```
-
-
-Custom Human Detection Dataset
-=============
-
-#### - Path of data_path_list.txt
-  - Build data path list file: https://github.com/qbxlvnf11/data-preprocessing-methods/blob/master/Utils/build_dataset_path_file.ipynb
-  - Train: './data/train_total_data_path_list.txt'
-  - Valid: './data/valid_total_data_path_list.txt'
-
-#### - Crowd Human Dataset
-
-https://www.crowdhuman.org/
-
-https://www.crowdhuman.org/download.html
-
-#### - Safety Helmet detection with Extended Labels (SHEL) Dataset
-
-https://data.mendeley.com/datasets/9rcv8mm682/2
-
-
-Download Weights & TensorRT Engine
-=============
-
-#### - Download COCO pretrained weights of Yolov7
-
-https://github.com/WongKinYiu/yolov7
-
-#### - Download fine-tuned weights and TensorRT engine of Yolov7
-  - Password: 1234
-  
-http://naver.me/5bdUjMvg
+#### - [Yolov12 Github](https://github.com/sunsmarterjie/yolov12)
 
 
 Docker Environments
 =============
 
-#### - Pull docker environment
+#### - Build docker environment
 
-```
-docker pull qbxlvnf11docker/yolov7_tensorrt
+``` 
+sudo docker pull qbxlvnf11docker/human-vision-package:v2
 ```
 
 #### - Run docker environment
 
 ```
-nvidia-docker run -it --gpus all --name yolov7_tensorrt --shm-size=64G -p 8844:8844 -e GRANT_SUDO=yes --user root -v {data_folder}:/workspace/data -v {yolov7_folder}:/workspace/yolov7 -w /workspace/yolov7 qbxlvnf11docker/yolov7_tensorrt bash
+sudo docker run -it --gpus all --name vision_package_env \
+--shm-size=64G -p {port}:{port} -e GRANT_SUDO=yes --user root \
+-v /tmp/.X11-unix:/tmp/.X11-unix -e DISPLAY=$DISPLAY \
+-v {root_path}:/workspace/vision_pack \
+-w /workspace/vision_pack qbxlvnf11docker/human-vision-package:v2 bash
 ```
 
 
-How to use
+Structures of Project Folders
 =============
 
-#### - Train Yolov7: Pre-Train or Fine-Tuning
-  - COCO pretrained: P5 & P6
+#### - CrowdHuman
 
-  ```
-  python train.py --workers 8 --device 0 --batch-size 16 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7.yaml --weights '' --name yolov7-coco-custom --hyp data/hyp.scratch.custom.yaml --epochs 300
-  ```
-  
-  ```
-  python train_aux.py --workers 8 --device 0 --batch-size 8 --data data/coco_custom.yaml --img 640 640 --cfg cfg/training/yolov7-w6.yaml --weights '' --name yolov7-w6-coco-custom --hyp data/hyp.scratch.custom.yaml --epochs 300
-  ```
+    - 'datasets/CrowdHuman'
+        - Original dataset folder of CrowdHuman
 
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune: P5 & P6
+    - 'datasets/CrowdHuman_coco_format'
+        - Preprocessing dataset folder of CrowdHuman for Ultralytics train format
+        - Run 'python datasets/CrowdHuman_convertor.py'
 
-  ```
-  python train.py --workers 8 --device 0 --batch-size 16 --data data/human_custom.yaml --img 640 640 --cfg cfg/training/yolov7-custom.yaml --weights ./weights/yolov7.pt --name yolov7-human-custom --hyp data/hyp.scratch.human_custom.yaml --epochs 100
-  ```
+#### - Safety Helmet Dataset
 
-  ```
-  python train_aux.py --workers 8 --device 0 --batch-size 2 --data data/human_w6_custom.yaml --img 640 640 --cfg cfg/training/yolov7-w6-custom.yaml --weights ./weights/yolov7-w6.pt --name yolov7-w6-human-custom --hyp data/hyp.scratch.human_custom.yaml --epochs 100
-  ```
+    - 'datasets/Safety_Helmet_Detection_with_Extended_Labels'
+        - Original dataset folder of Safety Helmet Dataset
 
-#### - Test Yolov7: Confusion Matrix, F1/PR/P/R Curve etc.
-  - COCO pretrained Weights
+    - 'datasets/Safety_Helmet_Detection_with_Extended_Labels_coco_format'
+        - Preprocessing dataset folder of Safety Helmet Dataset for Ultralytics train format
+        - Run 'python datasets/CrowdHuman_convertor.py'
 
-  ```
-  python test.py --data data/coco_custom.yaml --img 640 --batch 16 --conf 0.001 --iou 0.65 --device 0 --weights ./weights/yolov7.pt --name yolov7_coco_val --no-trace
-  ```
-  
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune Weights
+#### - Multi Dataset
 
-  ```
-  python test.py --data data/human_custom.yaml --img 640 --batch 16 --conf 0.001 --iou 0.65 --device 0 --weights ./weights/yolov7_human.pt --name yolov7_human_val --no-trace
-  ```
+    - 'datasets/multi_dataset'
+        - preprocessing dataset folder of multi dataset for Ultralytics train format
+        - Building it by concataneting many preprocessing dataset
 
-#### - Building Yolov7 ONNX
-  - For inference: add '--max-wh 640'
-  - COCO pretrained Weights
+#### - Custom Dataset
 
-  ```
-  python export_onnx.py --weights ./weights/yolov7.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
-  ```
-  
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune Weights
+    - 'datasets/custom_labeling'
+        - Original dataset folder of custom dataset with Anylabeling
 
-  ```
-  python export_onnx.py --weights ./weights/yolov7_human.pt --grid --end2end --simplify --topk-all 100 --iou-thres 0.65 --conf-thres 0.35 --img-size 640 640
-  ```
+    - 'datasets/custom_labeling_coco_format'
+        - preprocessing dataset folder of custom dataset for Ultralytics train format
+        - Run 'python datasets/auto_label_convertor.py'
 
-#### - Building Yolov7 FP16 TensorRT Engines (ONNX to TensorRT)
-  - Clone tensorrt-python reposit
-  
-  ```
-  git clone https://github.com/Linaom1214/tensorrt-python.git
-  ```
-  
-  - COCO pretrained ONNX
-
-  ```
-  python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_FP16.trt -p fp16
-  ```
-  
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune ONNX
-  
-  ```
-  python ./tensorrt-python/export_trt.py -o ./weights/yolov7_human.onnx -e ./weights/yolov7_human_FP16.trt -p fp16
-  ```
-
-#### - Building Yolov7 INT8 Calibration TensorRT Engines (ONNX to TensorRT)
-  - Clone tensorrt-python reposit
-  
-  ```
-  git clone https://github.com/Linaom1214/tensorrt-python.git
-  ```
-  
-  - COCO pretrained ONNX
-
-  ```
-  python ./tensorrt-python/export_trt.py -o ./weights/yolov7.onnx -e ./weights/yolov7_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
-  ```
-  
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune ONNX
-  
-  ```
-  python ./tensorrt-python/export_trt.py -o ./weights/yolov7_human.onnx -e ./weights/yolov7_human_INT8.trt -p int8 --calib_input ./samples/images --calib_cache ./weights/calibration.cache
-  ```
-
-#### - Pytorch Inference: detecting object with pretrained Yolov7
-  - COCO pretrained Weights
-
-  ```
-  python detect.py --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
-  ```
-  
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune Weights
-  
-  ```
-  python detect.py --weights ./weights/yolov7_human.pt --conf 0.4 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
-  ```
-
-#### - ONNX Inference: detecting object with Yolov7 ONNX
-  - COCO pretrained ONNX
-  
-  ```
-  python detect.py --onnx-inf --onnx-path ./weights/yolov7.onnx --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
-  ```
-
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune ONNX
-
-  ```
-  python detect.py --onnx-inf --onnx-path ./weights/yolov7_human.onnx --weights ./weights/yolov7_human.pt --conf 0.4 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
-  ```
-
-#### - FP16 TRT Inference: detecting object with Yolov7 FP16 TensorRT engine
-  - COCO pretrained TRT
-  
-  ```
-  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_FP16.trt --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
-  ```
-
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune TRT
-
-  ```
-  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_FP16.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
-  ```
-
-#### - INT8 TRT Inference: detecting object with Yolov7 INT8 Calibration TensorRT engine
-  - COCO pretrained TRT
-  
-  ```
-  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_INT8.trt --weights ./weights/yolov7.pt --conf 0.25 --img-size 640 --source samples/images/horses.jpg --no-trace
-  ```
-
-  - COCO pretrained + Custom Human Detection Dataset Fine-Tune TRT
-
-  ```
-  python detect.py --trt-inf --trt-engine-path ./weights/yolov7_human_INT8.trt --weights ./weights/yolov7_human.pt --conf 0.25 --img-size 640 --source samples/images/1066405,2bfbf000c47880b7.jpg --no-trace
-  ```
+        
+```
+${CODE_ROOT}
+            |   |-- train_detector.py
+            |   |-- demo.py
+            |   |-- ...
+            |   |-- datasets
+            |   |   |   |-- CrowdHuman
+            |   |   |   |   |   |-- CrowdHuman_train
+            |   |   |   |   |   |   |   |-- images
+            |   |   |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.jpg
+            |   |   |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |-- CrowdHuman_val
+            |   |   |   |   |   |   |   |-- images
+            |   |   |   |   |   |   |   |   |   |-- 273271,1b9330008da38cd6.jpg
+            |   |   |   |   |   |   |   |   |   |-- ...  
+            |   |   |   |   |   |-- annotation_train.odgt
+            |   |   |   |   |   |-- annotation_val.odgt
+            |   |   |   |   |   |-- ...
+            |   |   |   |-- CrowdHuman_coco_format
+            |   |   |   |   |   |-- images
+            |   |   |   |   |   |   |   |-- train
+            |   |   |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.jpg
+            |   |   |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |   |   |-- val
+            |   |   |   |   |   |   |   |   |   |-- 273271,1b9330008da38cd6.jpg
+            |   |   |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |-- labels
+            |   |   |   |   |   |   |   |-- train
+            |   |   |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.txt
+            |   |   |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |   |   |-- val
+            |   |   |   |   |   |   |   |   |   |-- 273271,1b9330008da38cd6.txt
+            |   |   |   |   |   |   |   |   |   |-- ...
+            |   |   |   |-- Safety_Helmet_Detection_with_Extended_Labels
+            |   |   |   |   |   |-- Images
+            |   |   |   |   |   |   |   |-- hard_hat_workers0.png
+            |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |-- Annotations
+            |   |   |   |   |   |   |   |-- hard_hat_workers0.xml
+            |   |   |   |   |   |   |   |-- ...
+            |   |   |   |-- Safety_Helmet_Detection_with_Extended_Labels_coco_format
+            |   |   |   |   |   |-- images
+            |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.jpg
+            |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |-- labels
+            |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.txt
+            |   |   |   |   |   |   |   |-- ...
+            |   |   |   |-- multi_dataset
+            |   |   |   |   |   |-- images
+            |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.jpg
+            |   |   |   |   |   |   |   |-- ...
+            |   |   |   |   |   |-- labels
+            |   |   |   |   |   |   |   |-- 273271,1a0d6000b9e1f5b7.txt
+            |   |   |   |   |   |   |   |-- ...
+            |   |   |   |-- custom_labeling
+            |   |   |   |   |   |-- custom_1.png
+            |   |   |   |   |   |-- custom_1.json
+            |   |   |   |   |   |-- ...
+            |   |   |   |-- custom_labeling_coco_format
+            |   |   |   |   |   |-- images
+            |   |   |   |   |   |   |   |-- train
+            |   |   |   |   |   |   |   |   |   |--  custom_1.png
+            |   |   |   |   |   |   |   |   |   |--  ...
+            |   |   |   |   |   |-- labels
+            |   |   |   |   |   |   |   |-- train
+            |   |   |   |   |   |   |   |   |   |--  custom_1.json
+            |   |   |   |   |   |   |   |   |   |--  ...
+            |   |   |   |-- ...
+```
 
 
-References
+Build & Preprocssing Dataset
 =============
 
-#### - Yolov7 paper
+#### - CrowdHuman Dataset Preprocessing
+
+    - Convert to COCO Format to train model
+    - Class setting: {"person": 0, "head": 80} (Refer to Line 11)
+
 ```
-@article{Yolov7,
-  title={YOLOv7: Trainable bag-of-freebies sets new state-of-the-art for real-time object detectors},
-  author={Chien-Yao Wang, Alexey Bochkovskiy, and Hong-Yuan Mark Liao Institute of Information Science, Academia Sinica, Taiwan},
-  journal = {arXiv},
-  year={2022}
-}
+python datasets/CrowdHuman_convertor.py 
 ```
 
-#### - Yolov7 Pytorch & TensorRT
+#### - Safety Helmet Dataset Preprocessing
 
-https://github.com/WongKinYiu/yolov7
+    - Convert to COCO Format to train model
+    - Class setting: {"person_no_helmet": 0, "person_with_helmet": 0, "head": 80, "head_with_helmet": 81, "helmet": 82} (Refer to Line 12)
 
-#### - torch2trt
+```
+python datasets/safety_helmet_detection_dataset_convertor.py
+```
 
-https://github.com/NVIDIA-AI-IOT/torch2trt
+#### - Build Nulti Dataset
+
+    - Concatanete Preprocessing CrowdHuman Dataset folder and Preprocessing Safety Helmet Dataset folder
+
+#### - Custom Dataset Labeling
+
+    - Using Anylabeling labeling tools: [Anylabeling](https://github.com/vietanhdev/anylabeling)
+    - How to use Anylabeling: [How to use Anylabeling](https://github.com/qbxlvnf11/SAM2-based-semi-auto-labeling)
+
+#### - Build Custom Dataset
+
+    - Convert to COCO Format to train model
+    - Class setting: {"person_no_helmet": 0, "person_with_helmet": 0, "head": 80, "head_with_helmet": 81, "helmet": 82} (Refer to Line 12)
+
+```
+python datasets/auto_label_convertor.py
+```
+
+
+Ultralytics Settings
+=============
+
+```
+nano /root/.config/Ultralytics/settings.json
+```
+
+
+Run YOLO 11 & 12 Model
+=============
+   
+    - Pre-train weights: "yolo11n.pt", "yolo11s.pt", "yolo11m.pt", "yolo11l.pt", "yolo11x.pt", ...
+
+    - Fine-Tuning 
+        - yolo_12_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo12_x_crowd_human.yaml'
+        - yolo_12_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo12_x_safety_helmat.yaml'
+        - yolo_12_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo12_x_human_dataset.yaml'
+        - yolo_12_x using Custom Dataset: 'cfg/train/fine_tune_yolo12_x_custom_dataset.yaml'
+        - yolo_11_x using CrowdHuman Dataset: 'cfg/train/fine_tune_yolo11_x_crowd_human.yaml'
+        - yolo_11_x using Safety Helmet Dataset: 'cfg/train/fine_tune_yolo11_x_safety_helmat.yaml'
+        - yolo_11_x using Multi Dataset (Safety Helmet Dataset + CrowdHuman Dataset): 'cfg/train/fine_tune_yolo11_x_human_dataset.yaml'
+        - yolo_11_x using Custom Dataset: 'cfg/train/fine_tune_yolo11_x_custom_dataset.yaml'
+
+```
+python fine_tuning.py --config {config_path}
+```
+   
+    - inference
+        - 'demo_yolo11.yaml'
+
+```
+python demo.py --config {config_path}
+```
 
 
 Author
 =============
 
-#### - LinkedIn: https://www.linkedin.com/in/taeyong-kong-016bb2154
+#### - [LinkedIn](https://www.linkedin.com/in/taeyong-kong-016bb2154)
 
-#### - Blog URL: https://blog.naver.com/qbxlvnf11
+#### - [Blog](https://blog.naver.com/qbxlvnf11)
 
 #### - Email: qbxlvnf11@google.com, qbxlvnf11@naver.com
+
+
